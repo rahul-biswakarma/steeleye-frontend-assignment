@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/steeleye-frontend-assignment/static/css/main.15a11d91.css",
+    "main.js": "/steeleye-frontend-assignment/static/js/main.21cc7d56.js",
+    "index.html": "/steeleye-frontend-assignment/index.html",
+    "main.15a11d91.css.map": "/steeleye-frontend-assignment/static/css/main.15a11d91.css.map",
+    "main.21cc7d56.js.map": "/steeleye-frontend-assignment/static/js/main.21cc7d56.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.15a11d91.css",
+    "static/js/main.21cc7d56.js"
+  ]
+}
