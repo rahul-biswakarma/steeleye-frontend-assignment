@@ -29,10 +29,10 @@ Above mentioned fixes were enough for the React app to run, but after analyzing 
 ```javascript
 	// Items Array
 	const items= [
-	{
-	text: string
-	selected: bool
-	}
+	  {
+	    text: string
+	    selected: bool
+	  }
 	]
 ```
 
@@ -40,8 +40,8 @@ Above mentioned fixes were enough for the React app to run, but after analyzing 
 ```javascript
 	// State 
 	const [itemsState, setItemsState] = useState([]);
-	useEffect(() => {
-	setItemsState(items);
+	  useEffect(() => {
+	  setItemsState(items);
 	}, [items]);
 ```
 
@@ -49,10 +49,10 @@ Above mentioned fixes were enough for the React app to run, but after analyzing 
 ```javascript
 	// Handle Click Function
 	const handleClick = (targetIndex) => {
-	let updateItems = itemsState.map((item, index) => {
-	return targetIndex == index? { ...item, selected: !item.selected }: { ...item };
-	});
-	setItemsState(updateItems);
+	  let updateItems = itemsState.map((item, index) => {
+	    return targetIndex == index? { ...item, selected: !item.selected }: { ...item };
+	  });
+	  setItemsState(updateItems);
 	};
 ```
 
