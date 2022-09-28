@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
 
-function App() {
+import List from "./components/Lists";
+
+const items = [
+  { text: "Monitor", selected: false },
+  { text: "Keyboard", selected: false },
+  { text: "Mouse", selected: false },
+  { text: "Gamepad", selected: false },
+  { text: "RTX 3050", selected: false },
+];
+
+const Home = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="AppContainer">
+      <List items={items} />
     </div>
   );
-}
+};
 
-export default App;
+export default Home;

@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+#Steeleye - Frontend Engineer Assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Github Repo: https://github.com/rahul-biswakarma/steeleye-frontend-assignment
+***
 
-## Available Scripts
+###1. Explain what the simple List component does.
+The simple **List component** is responsible for generating and returning the *unordered list*,  `<ul>` with the help of **WrappedListComponent** and **SingleListItem**. It generates the unordered list from the *items* array that contains objects with one key-value pair i.e., **text**, which accepts a string as its value.
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Talking about the working of the **List Component**, it calls **WrappedListComponent** which maps through the items array, and for each index, it calls the **SingleListItem** component which in turn returns the `<li>` tag, and then WrappedListComponent  constructs the `<ul>`.
+***
+###2. What problems/warnings are there with the code?
+There are several typos and syntax errors in the code. Below listed are the errors and warnings I found.
+1. The first error encountered was `prop_types_WEBPACK_INPORTED_MODULE__default(...).shapeOf is not a function`. The Fix for this is to rename the `Proptypes.shapeOf` to **`Proptypes.shape`**
+<br/>
+2. The second error was similar to the first one, the error was **Invariant Violation**. The fix for this one is to rename `Proptypes.array` to **`Proptypes.arrayOf`**
+<br/>
+3. The next error was `TypeError: Cannot read properties of null `. A simple fix for this is to check for the variable before mapping. **`itemsState?.map((item, index) => ())`**
+<br/>
+4. A state-related error `TypeError: setSelectedIndex is not a function` This error has occurred because this variable name was given to the useState variable, but it was used to update the state. So to fix this, just replace that state variable and function names. **`const [selectedIndex, setSelectedIndex] = useState();`**
+<br/>
+5. `WrappedListComponent.defaultProps` items were set to `null` which is not recommended. It is better to use **`undefined`** instead of `null`.
+<br/>
+6. Function reference should be passed on `onClick` event, but a function call was made
+<br/>
+7. `isSelected` is a boolean type, but the value passed is an integer.
+<br/>
+8. Each child in a list should have a unique `key`.
+***
+###3. Please fix, optimize, and/or modify the component as much as you think is necessary.
+Above mentioned fixes were enough for the React app to run, but after analyzing the code, I found some logical errors, so I modified some parts of the code to make it work logically correctly.
+1. Modified the items array.
+		// Items Array
+		const items= [
+			{
+				text: string
+				selected: bool
+			}
+		]
+2. Changed the working and usage of state. Now it stores the whole items array as a state.
+		// State 
+		const [itemsState, setItemsState] = useState([]);
+		useEffect(() => {
+			setItemsState(items);
+		}, [items]);
+3. Next, I modified the handleClick function to change the selected key value based on the previous value.
+		// Handle Click Function
+		const handleClick = (targetIndex) => {
+			let updateItems = itemsState.map((item, index) => {
+					return targetIndex == index? { ...item, selected: !item.selected }: { ...item };
+			});
+			setItemsState(updateItems);
+		};
+4. I have also created different component files for the `WrappedSingleListItem` and `WrappedListComponent`.
+5. Also, added some minor CSS.
+6. Create a dummy items array to demonstrate the working of the app.
+7. Assignment is available in: https://github.com/rahul-biswakarma/steeleye-frontend-assignment
+<br/>
+With the help of the above modifications, now the app can track the change of selected state for every element in the array and then changes background accordingly.
