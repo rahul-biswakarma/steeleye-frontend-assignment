@@ -40,7 +40,7 @@ Above mentioned fixes were enough for the React app to run, but after analyzing 
 ```javascript
 	// State 
 	const [itemsState, setItemsState] = useState([]);
-	  useEffect(() => {
+	useEffect(() => {
 	  setItemsState(items);
 	}, [items]);
 ```
